@@ -16,9 +16,9 @@ export class App extends Component {
   //   }));
   // };
 
-  handleFormSubmit = image => {
-    console.log('hello handleFormSubmiееееt');
-    this.setState(this.state.images.push(image));
+  handleFormSubmit = foundImages => {
+    console.log('hello handleFormSubmiеt');
+    this.setState(foundImages);
   };
 
   render() {
