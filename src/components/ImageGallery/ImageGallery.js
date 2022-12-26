@@ -1,10 +1,6 @@
+// import { ImageGalleryItem } from '../ImageGalleryItem';
 import { ImageGalleryList } from './ImageGallery.styled';
-import { ImageGalleryItem } from '../ImageGalleryItem';
 
-export const ImageGallery = () => {
-  return (
-    <ImageGalleryList>
-      <ImageGalleryItem />
-    </ImageGalleryList>
-  );
+export const ImageGallery = ({ items }) => {
+  return <ImageGalleryList>{/* <ImageGalleryItem /> */}</ImageGalleryList>;
 };

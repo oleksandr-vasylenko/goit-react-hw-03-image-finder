@@ -1,16 +1,34 @@
+import { Component } from 'react';
 import { GlobalStyle } from '../../GlobalStyle';
-import { AppThumb } from './App.Styled';
 import { Searchbar } from 'components/Searchbar/Searchbar';
+import { AppThumb } from './App.Styled';
+import { ButtonLoadMore } from 'components/Button/Button.Styled';
+import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 
-// const API_KEY = '30715503-b05874fb24d95ac5a3c3e4a16';
-// https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12
+export class App extends Component {
+  state = {
+    images: [],
+  };
 
-export const App = () => {
-  return (
-    <AppThumb>
-      <Searchbar />
-      <p>hello</p>
-      <GlobalStyle />
-    </AppThumb>
-  );
-};
+  // loadMore = () => {
+  //   this.setState(prevState => ({
+  //     page: prevState.page + 1,
+  //   }));
+  // };
+
+  handleFormSubmit = image => {
+    console.log('hello handleFormSubmiееееt');
+    this.setState(this.state.images.push(image));
+  };
+
+  render() {
+    return (
+      <AppThumb>
+        <Searchbar onSubmit={this.handleFormSubmit} />
+        <ImageGallery items={this.state.images} />
+        <ButtonLoadMore />
+        <GlobalStyle />
+      </AppThumb>
+    );
+  }
+}
