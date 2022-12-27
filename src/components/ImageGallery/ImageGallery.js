@@ -1,10 +1,14 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
-import { ImageGalleryList } from './ImageGallery.styled';
+import { ImageGalleryList, ImageGalleryItemStyle } from './ImageGallery.styled';
 
-export const ImageGallery = items => {
+export const ImageGallery = ({ items }) => {
   return (
     <ImageGalleryList>
-      <ImageGalleryItem />
+      {items.map(item => (
+        <ImageGalleryItemStyle key={item.id}>
+          <ImageGalleryItem webformatURL={item.webformatURL} tags={item.tags} />
+        </ImageGalleryItemStyle>
+      ))}
     </ImageGalleryList>
   );
 };

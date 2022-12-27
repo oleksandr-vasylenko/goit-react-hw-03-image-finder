@@ -7,7 +7,7 @@ import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {
-    images: [],
+    items: [],
   };
 
   // loadMore = () => {
@@ -16,16 +16,16 @@ export class App extends Component {
   //   }));
   // };
 
-  handleFormSubmit = foundImages => {
-    console.log('hello handleFormSubmiеt');
-    this.setState(foundImages);
+  handleFormSubmit = foundImagesArr => {
+    console.log(foundImagesArr);
+    this.setState({ items: foundImagesArr });
   };
 
   render() {
     return (
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery items={this.state.images} />
+        <ImageGallery items={this.state.items} />
         <ButtonLoadMore />
         <GlobalStyle />
       </AppThumb>
