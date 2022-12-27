@@ -32,7 +32,9 @@ export class Searchbar extends Component {
       prevState.page !== this.state.page ||
       prevState.query !== this.state.query
     ) {
-      fetchImages(this.state.query, this.state.page).then(data => {});
+      fetchImages(this.state.query, this.state.page).then(images =>
+        this.setState({ items: images.hits })
+      );
     }
   }
 
