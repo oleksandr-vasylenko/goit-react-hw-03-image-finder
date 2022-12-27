@@ -4,6 +4,7 @@ import { Searchbar } from 'components/Searchbar/Searchbar';
 import { AppThumb } from './App.Styled';
 import { ButtonLoadMore } from 'components/Button/Button.Styled';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
+import { Button } from 'components/Button/Button';
 
 export class App extends Component {
   state = {
@@ -26,7 +27,7 @@ export class App extends Component {
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery items={this.state.items} />
-        <ButtonLoadMore />
+        {this.state.items.length > 0 && <Button />}
         <GlobalStyle />
       </AppThumb>
     );
