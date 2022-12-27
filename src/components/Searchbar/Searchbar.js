@@ -20,9 +20,7 @@ export class Searchbar extends Component {
     e.preventDefault();
 
     this.setState({
-      page: 1,
       query: e.target.elements.query.value,
-      items: [],
     });
     this.props.onSubmit(this.state.items);
     e.target.reset();
