@@ -25,7 +25,7 @@ export class App extends Component {
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery items={this.state.items} />
-        {this.state.items.length > 0 && <Button />}
+        {this.state.items.length > 11 && <Button />}
         <GlobalStyle />
       </AppThumb>
     );
