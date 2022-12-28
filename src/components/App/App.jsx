@@ -25,17 +25,17 @@ export class App extends Component {
     if (prevState.page !== this.state.page) {
       this.setState({ loading: true });
       fetchImages(this.state.query, this.state.page)
-        .then(image => {
+        .then(data => {
           this.setState({
-            images: [...prevState.images, ...image.hits],
+            images: [...prevState.images, ...data.hits],
           });
         })
         .finally(() => this.setState({ loading: false }));
     } else if (prevState.query !== this.state.query) {
       this.setState({ loading: true });
       fetchImages(this.state.query, this.state.page)
-        .then(image => {
-          this.setState({ images: image.hits });
+        .then(data => {
+          this.setState({ images: data.hits });
         })
         .finally(() => this.setState({ loading: false }));
     }
@@ -52,9 +52,6 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery images={this.state.images} />
 
-        {this.state.images.length > 11 && (
-          <button onClick={this.loadMore}>LOAD MORE</button>
-        )}
         {this.state.loading && (
           <RotatingLines
             strokeColor="grey"
@@ -64,6 +61,11 @@ export class App extends Component {
             visible={true}
           />
         )}
+
+        {this.state.images.length > 11 && (
+          <button onClick={this.loadMore}>LOAD MORE</button>
+        )}
+
         <GlobalStyle />
       </AppThumb>
     );

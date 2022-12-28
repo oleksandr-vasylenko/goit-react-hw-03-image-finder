@@ -1,4 +1,3 @@
-// import { fetchImages } from 'components/services/api';
 import { Component } from 'react';
 
 import {

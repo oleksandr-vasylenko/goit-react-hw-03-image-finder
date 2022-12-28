@@ -1,29 +1,38 @@
-import { Component } from 'react';
-import { ImageGalleryItemImageImg } from './ImageGalleryItem.Styled';
-import { Modal } from 'components/Modal/Modal';
+// import { Component } from 'react';
+// import { Modal } from 'components/Modal/Modal';
 
-export class ImageGalleryItem extends Component {
-  state = {
-    isModalOpen: false,
-  };
+import { ImageItemStyle, ImageStyle } from './ImageGalleryItem.Styled';
 
-  openModal = () => this.setState({ isModalOpen: true });
-  closeModal = () => this.setState({ isModalOpen: false });
+export const ImageItem = ({ images }) => {
+  return images.map(image => (
+    <ImageItemStyle>
+      <ImageStyle src={image.webformatURL} alt={image.tags}></ImageStyle>
+    </ImageItemStyle>
+  ));
+};
 
-  render() {
-    const { webformatURL, tags, largeImageURL } = this.props;
+// export class ImageGalleryItem extends Component {
+//   state = {
+//     isModalOpen: false,
+//   };
 
-    return (
-      <>
-        <ImageGalleryItemImageImg
-          src={webformatURL}
-          alt={tags}
-          onClick={this.openModal}
-        />
-        {this.state.isModalOpen && (
-          <Modal largeImageURL={largeImageURL} tags={tags} />
-        )}
-      </>
-    );
-  }
-}
+//   openModal = () => this.setState({ isModalOpen: true });
+//   closeModal = () => this.setState({ isModalOpen: false });
+
+//   render() {
+//     const { webformatURL, tags, largeImageURL } = this.props;
+
+//     return (
+//       <>
+//         <ImageGalleryItemImageImg
+//           src={webformatURL}
+//           alt={tags}
+//           onClick={this.openModal}
+//         />
+//         {this.state.isModalOpen && (
+//           <Modal largeImageURL={largeImageURL} tags={tags} />
+//         )}
+//       </>
+//     );
+//   }
+// }

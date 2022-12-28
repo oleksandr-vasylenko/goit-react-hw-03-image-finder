@@ -1,11 +1,11 @@
-import { OverlayThumb } from './Modal.Styled';
+import { OverlayThumb, ModalThumb } from './Modal.Styled';
 
 export const Modal = ({ largeImageURL, tags }) => {
   return (
     <OverlayThumb>
-      <div className="modal">
+      <ModalThumb>
         <img src={largeImageURL} alt={tags} />
-      </div>
+      </ModalThumb>
     </OverlayThumb>
   );
 };
