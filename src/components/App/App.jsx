@@ -4,9 +4,12 @@ import { Searchbar } from 'components/Searchbar/Searchbar';
 import { AppThumb } from './App.Styled';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
+import { fetchImages } from 'components/services/api';
 
 export class App extends Component {
   state = {
+    query: '',
+    page: 1,
     items: [],
   };
 
@@ -16,8 +19,19 @@ export class App extends Component {
   //   }));
   // };
 
-  handleFormSubmit = foundImagesArr => {
-    this.setState({ items: foundImagesArr });
+  componentDidUpdate(_, prevState) {
+    if (
+      prevState.page !== this.state.page ||
+      prevState.query !== this.state.query
+    ) {
+      fetchImages(this.state.query, this.state.page).then(image =>
+        this.setState({ items: image.hits })
+      );
+    }
+  }
+
+  handleFormSubmit = sumbittedQuery => {
+    this.setState({ query: sumbittedQuery });
   };
 
   render() {

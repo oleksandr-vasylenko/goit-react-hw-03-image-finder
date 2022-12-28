@@ -1,4 +1,4 @@
-import { fetchImages } from 'components/services/api';
+// import { fetchImages } from 'components/services/api';
 import { Component } from 'react';
 
 import {
@@ -11,31 +11,20 @@ import {
 
 export class Searchbar extends Component {
   state = {
-    page: 1,
     query: '',
-    items: [],
+  };
+
+  inputType = e => {
+    this.setState({ query: e.target.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    this.setState({
-      query: e.target.elements.query.value,
-    });
-    this.props.onSubmit(this.state.items);
-    e.target.reset();
-  };
+    this.props.onSubmit(this.state.query);
 
-  componentDidUpdate(_, prevState) {
-    if (
-      prevState.page !== this.state.page ||
-      prevState.query !== this.state.query
-    ) {
-      fetchImages(this.state.query, this.state.page).then(image =>
-        this.setState({ items: image.hits })
-      );
-    }
-  }
+    this.setState({ query: '' });
+  };
 
   render() {
     return (
@@ -46,6 +35,7 @@ export class Searchbar extends Component {
           </SearchFormButton>
 
           <SearchFormInput
+            onChange={this.inputType}
             type="text"
             name="query"
             autocomplete="off"
