@@ -11,7 +11,7 @@ export class App extends Component {
   state = {
     query: '',
     page: 1,
-    items: [],
+    images: [],
     loading: false,
   };
 
@@ -27,7 +27,7 @@ export class App extends Component {
       fetchImages(this.state.query, this.state.page)
         .then(image => {
           this.setState({
-            items: [...prevState.items, ...image.hits],
+            images: [...prevState.images, ...image.hits],
           });
         })
         .finally(() => this.setState({ loading: false }));
@@ -35,7 +35,7 @@ export class App extends Component {
       this.setState({ loading: true });
       fetchImages(this.state.query, this.state.page)
         .then(image => {
-          this.setState({ items: image.hits });
+          this.setState({ images: image.hits });
         })
         .finally(() => this.setState({ loading: false }));
     }
@@ -46,13 +46,13 @@ export class App extends Component {
   };
 
   render() {
-    // console.log(this.state.items.length % 12 < 12);
+    // console.log(this.state.images.length % 12 < 12);
     return (
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery items={this.state.items} />
+        <ImageGallery images={this.state.images} />
 
-        {this.state.items.length > 11 && (
+        {this.state.images.length > 11 && (
           <button onClick={this.loadMore}>LOAD MORE</button>
         )}
         {this.state.loading && (
