@@ -19,23 +19,6 @@ export class App extends Component {
     }));
   };
 
-  // componentDidUpdate(_, prevState) {
-  //   if (
-  //     prevState.page !== this.state.page ||
-  //     prevState.query !== this.state.query
-  //   ) {
-  //     fetchImages(this.state.query, this.state.page).then(image => {
-  //       if (prevState.items.length > 0) {
-  //         this.setState({
-  //           items: [...prevState.items, ...image.hits],
-  //         });
-  //       } else {
-  //         this.setState({ items: image.hits });
-  //       }
-  //     });
-  //   }
-  // }
-
   componentDidUpdate(_, prevState) {
     if (prevState.page !== this.state.page) {
       fetchImages(this.state.query, this.state.page).then(image => {
@@ -55,10 +38,12 @@ export class App extends Component {
   };
 
   render() {
+    // console.log(this.state.items.length % 12 < 12);
     return (
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery items={this.state.items} />
+
         {this.state.items.length > 11 && (
           <button onClick={this.loadMore}>LOAD MORE</button>
         )}
