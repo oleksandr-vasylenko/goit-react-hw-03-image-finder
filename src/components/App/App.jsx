@@ -19,19 +19,33 @@ export class App extends Component {
     }));
   };
 
+  // componentDidUpdate(_, prevState) {
+  //   if (
+  //     prevState.page !== this.state.page ||
+  //     prevState.query !== this.state.query
+  //   ) {
+  //     fetchImages(this.state.query, this.state.page).then(image => {
+  //       if (prevState.items.length > 0) {
+  //         this.setState({
+  //           items: [...prevState.items, ...image.hits],
+  //         });
+  //       } else {
+  //         this.setState({ items: image.hits });
+  //       }
+  //     });
+  //   }
+  // }
+
   componentDidUpdate(_, prevState) {
-    if (
-      prevState.page !== this.state.page ||
-      prevState.query !== this.state.query
-    ) {
+    if (prevState.page !== this.state.page) {
       fetchImages(this.state.query, this.state.page).then(image => {
-        if (prevState.items.length > 0) {
-          this.setState({
-            items: [...prevState.items, ...this.state.items],
-          });
-        } else {
-          this.setState({ items: image.hits });
-        }
+        this.setState({
+          items: [...prevState.items, ...image.hits],
+        });
+      });
+    } else if (prevState.query !== this.state.query) {
+      fetchImages(this.state.query, this.state.page).then(image => {
+        this.setState({ items: image.hits });
       });
     }
   }
