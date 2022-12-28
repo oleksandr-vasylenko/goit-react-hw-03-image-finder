@@ -3,7 +3,7 @@ import { GlobalStyle } from '../../GlobalStyle';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { AppThumb } from './App.Styled';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import { Button } from 'components/Button/Button';
+// import { Button } from 'components/Button/Button';
 import { fetchImages } from 'components/services/api';
 
 export class App extends Component {
@@ -13,20 +13,26 @@ export class App extends Component {
     items: [],
   };
 
-  // loadMore = () => {
-  //   this.setState(prevState => ({
-  //     page: prevState.page + 1,
-  //   }));
-  // };
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
 
   componentDidUpdate(_, prevState) {
     if (
       prevState.page !== this.state.page ||
       prevState.query !== this.state.query
     ) {
-      fetchImages(this.state.query, this.state.page).then(image =>
-        this.setState({ items: image.hits })
-      );
+      fetchImages(this.state.query, this.state.page).then(image => {
+        if (prevState.items.length > 0) {
+          this.setState({
+            items: [...prevState.items, ...this.state.items],
+          });
+        } else {
+          this.setState({ items: image.hits });
+        }
+      });
     }
   }
 
@@ -39,7 +45,9 @@ export class App extends Component {
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery items={this.state.items} />
-        {this.state.items.length > 11 && <Button />}
+        {this.state.items.length > 11 && (
+          <button onClick={this.loadMore}>LOAD MORE</button>
+        )}
         <GlobalStyle />
       </AppThumb>
     );
