@@ -7,12 +7,6 @@ export class ImageItem extends Component {
     isModalOpen: false,
   };
 
-  // toggleModal = () => {
-  //   this.setState(prevState => ({
-  //     isModalOpen: !prevState.isModalOpen,
-  //   }));
-  // };
-
   openModal = () => {
     this.setState({ isModalOpen: true });
   };
