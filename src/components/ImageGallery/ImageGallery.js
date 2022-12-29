@@ -1,10 +1,10 @@
 import { ImageItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { ImageLayout } from './ImageGallery.styled';
 
-export const ImageGallery = ({ images }) => {
+export const ImageGallery = ({ images, onSelect }) => {
   return (
     <ImageLayout>
-      <ImageItem images={images} />
+      <ImageItem images={images} onSelect={onSelect} />
     </ImageLayout>
   );
 };

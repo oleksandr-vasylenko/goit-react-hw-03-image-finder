@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Modal } from 'components/Modal/Modal';
+// import { Modal } from 'components/Modal/Modal';
 import { ImageItemStyle, ImageStyle } from './ImageGalleryItem.Styled';
 
 export class ImageItem extends Component {
@@ -7,24 +7,27 @@ export class ImageItem extends Component {
     isModalOpen: false,
   };
 
-  openModal = () => this.setState({ isModalOpen: true });
+  handleClickOnImage = e => {
+    console.dir(e.target);
+    // this.props.onSubmit(this.state.query);
+  };
 
-  closeModal = () => this.setState({ isModalOpen: false });
+  // openModal = () => this.setState({ isModalOpen: true });
+  // closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
     // console.dir(this.props.images[0].id);
     // const { webformatURL, tags, largeImageURL } = this.props.images;
 
     return this.props.images.map(image => (
-      <ImageItemStyle>
+      <ImageItemStyle key={image.id}>
         <ImageStyle
           src={image.webformatURL}
           alt={image.imagetags}
-          onClick={this.openModal}
+          onClick={() => {
+            this.props.onSelect(image.largeImageURL);
+          }}
         />
-        {this.state.isModalOpen && (
-          <Modal largeImageURL={image.largeImageURL} tags={image.tags} />
-        )}
       </ImageItemStyle>
     ));
   }

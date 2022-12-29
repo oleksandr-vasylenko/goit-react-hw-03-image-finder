@@ -8,13 +8,28 @@ import { fetchImages } from 'components/services/api';
 import { RotatingLines } from 'react-loader-spinner';
 // import { Modal } from 'components/Modal/Modal';
 
+import Modal from 'react-modal';
+
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+Modal.setAppElement('#root');
+
 export class App extends Component {
   state = {
     query: '',
     page: 1,
     images: [],
     loading: false,
-    // isModalOpen: false,
+    selectedImage: null,
   };
 
   componentDidUpdate(_, prevState) {
@@ -47,13 +62,28 @@ export class App extends Component {
     }));
   };
 
+  handleOnImageClick = imageUrl => {
+    this.setState({ selectedImage: imageUrl });
+  };
+
+  closeModal = () => {
+    this.setState({ selectedImage: null });
+  };
+
+  // openModal = () => this.setState({ isModalOpen: true });
+
+  // closeModal = () => this.setState({ isModalOpen: false });
+
   render() {
     // console.log(this.state.images.length % 12 < 12);
     return (
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
 
-        <ImageGallery images={this.state.images} />
+        <ImageGallery
+          images={this.state.images}
+          onSelect={this.handleOnImageClick}
+        />
 
         {this.state.images.length > 11 && (
           <button onClick={this.loadMore}>LOAD MORE</button>
@@ -68,6 +98,19 @@ export class App extends Component {
             visible={true}
           />
         )}
+
+        <Modal
+          isOpen={this.state.selectedImage !== null}
+          onRequestClose={() => this.closeModal}
+          style={modalStyles}
+        >
+          <button onClick={this.closeModal}>close</button>
+          <img src={this.state.selectedImage} alt="selected item"></img>
+        </Modal>
+
+        {/* {this.state.isModalOpen && (
+          <Modal largeImageURL={image.largeImageURL} tags={image.tags} />
+        )} */}
 
         <GlobalStyle />
       </AppThumb>
