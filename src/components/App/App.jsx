@@ -6,6 +6,7 @@ import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 // import { Button } from 'components/Button/Button';
 import { fetchImages } from 'components/services/api';
 import { RotatingLines } from 'react-loader-spinner';
+// import { Modal } from 'components/Modal/Modal';
 
 export class App extends Component {
   state = {
@@ -13,12 +14,7 @@ export class App extends Component {
     page: 1,
     images: [],
     loading: false,
-  };
-
-  loadMore = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1,
-    }));
+    // isModalOpen: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -45,12 +41,23 @@ export class App extends Component {
     this.setState({ query: sumbittedQuery });
   };
 
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
+
   render() {
     // console.log(this.state.images.length % 12 < 12);
     return (
       <AppThumb>
         <Searchbar onSubmit={this.handleFormSubmit} />
+
         <ImageGallery images={this.state.images} />
+
+        {this.state.images.length > 11 && (
+          <button onClick={this.loadMore}>LOAD MORE</button>
+        )}
 
         {this.state.loading && (
           <RotatingLines
@@ -60,10 +67,6 @@ export class App extends Component {
             width="96"
             visible={true}
           />
-        )}
-
-        {this.state.images.length > 11 && (
-          <button onClick={this.loadMore}>LOAD MORE</button>
         )}
 
         <GlobalStyle />
