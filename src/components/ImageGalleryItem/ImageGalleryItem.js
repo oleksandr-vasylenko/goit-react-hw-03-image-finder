@@ -37,7 +37,7 @@ export class ImageItem extends Component {
         />
         <Modal
           isOpen={this.state.isModalOpen}
-          onRequestClose={() => this.closeModal}
+          onRequestClose={this.closeModal}
           style={modalStyles}
         >
           <button onClick={this.closeModal}>close</button>
