@@ -1,27 +1,20 @@
 import { ImageItem } from 'components/ImageGalleryItem/ImageGalleryItem';
-import { ImageLayout } from './ImageGallery.styled';
+import { ImageLayout, ImageItemStyle } from './ImageGallery.styled';
 
 export const ImageGallery = ({ images }) => {
   return (
-    <ImageLayout>
-      <ImageItem images={images} />
-    </ImageLayout>
+    <div>
+      <ImageLayout>
+        {images.map(image => (
+          <ImageItemStyle key={image.id}>
+            <ImageItem
+              webformatURL={image.webformatURL}
+              tags={image.imagetags}
+              largeImageURL={image.largeImageURL}
+            />
+          </ImageItemStyle>
+        ))}
+      </ImageLayout>
+    </div>
   );
 };
-
-// export const ImageGallery = ({ images }) => {
-//   return (
-//     <div>
-//       <ImageGalleryList>
-//         {images.map(image => (
-//           <ImageGalleryItemStyle key={image.id}>
-//             <ImageGalleryItem
-//               webformatURL={image.webformatURL}
-//               tags={image.tags}
-//             />
-//           </ImageGalleryItemStyle>
-//         ))}
-//       </ImageGalleryList>
-//     </div>
-//   );
-// };
