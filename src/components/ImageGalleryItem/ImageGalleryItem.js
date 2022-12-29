@@ -21,9 +21,11 @@ export class ImageItem extends Component {
     isModalOpen: false,
   };
 
-  openModal = () => this.setState({ isModalOpen: true });
-
-  closeModal = () => this.setState({ isModalOpen: false });
+  toggleModal = () => {
+    this.setState(prevState => ({
+      isModalOpen: !prevState.isModalOpen,
+    }));
+  };
 
   render() {
     const { webformatURL, imagetags, largeImageURL } = this.props;
@@ -33,14 +35,14 @@ export class ImageItem extends Component {
         <ImageStyle
           src={webformatURL}
           alt={imagetags}
-          onClick={this.openModal}
+          onClick={this.toggleModal}
         />
         <Modal
           isOpen={this.state.isModalOpen}
-          onRequestClose={this.closeModal}
+          onRequestClose={this.toggleModal}
           style={modalStyles}
         >
-          <button onClick={this.closeModal}>close</button>
+          <button onClick={this.toggleModal}>close</button>
           <img src={largeImageURL} alt={imagetags}></img>
         </Modal>
       </>
