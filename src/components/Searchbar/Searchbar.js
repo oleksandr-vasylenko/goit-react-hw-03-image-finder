@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { GrSearch } from 'react-icons/gr';
 
 import {
   SearchbarHeader,
@@ -31,7 +32,8 @@ export class Searchbar extends Component {
       <SearchbarHeader>
         <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormButton type="submit">
-            <SearchFormLabel>Search</SearchFormLabel>
+            <GrSearch />
+            <SearchFormLabel></SearchFormLabel>
           </SearchFormButton>
 
           <SearchFormInput
