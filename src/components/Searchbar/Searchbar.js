@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { GrSearch } from 'react-icons/gr';
 
 import {
@@ -28,6 +29,7 @@ export class Searchbar extends Component {
   };
 
   render() {
+    // console.log(this.props);
     return (
       <SearchbarHeader>
         <SearchForm onSubmit={this.handleSubmit}>
@@ -49,3 +51,7 @@ export class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+};

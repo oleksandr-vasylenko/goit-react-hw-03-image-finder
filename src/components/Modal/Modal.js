@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
 const modalStyles = {
@@ -29,4 +30,11 @@ export const ImageModal = ({ isOpen, isClosed, largeImageURL, tags }) => {
       <img src={largeImageURL} alt={tags}></img>
     </Modal>
   );
+};
+
+ImageModal.propTypes = {
+  isOpen: PropTypes.func,
+  isClosed: PropTypes.func,
+  largeImageURL: PropTypes.string,
+  tags: PropTypes.string,
 };

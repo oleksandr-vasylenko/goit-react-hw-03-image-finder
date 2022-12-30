@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ImageModal } from 'components/Modal/Modal';
 import { ImageStyle } from './ImageGalleryItem.Styled';
 
@@ -16,7 +17,7 @@ export class ImageItem extends Component {
   };
 
   render() {
-    const { webformatURL, tags, largeImageURL } = this.props;
+    const { webformatURL, largeImageURL, tags } = this.props;
 
     return (
       <>
@@ -34,3 +35,9 @@ export class ImageItem extends Component {
     );
   }
 }
+
+ImageItem.propTypes = {
+  webformatURL: PropTypes.string,
+  largeImageURL: PropTypes.string,
+  tags: PropTypes.string,
+};
