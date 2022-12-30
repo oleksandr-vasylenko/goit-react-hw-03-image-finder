@@ -54,11 +54,12 @@ export class App extends Component {
 
         <ImageGallery images={this.state.images} />
 
+        {this.state.loading && <Loader />}
+
         {this.state.images.length > 11 && (
           <Button onLoadClick={this.loadMore}>LOAD MORE</Button>
         )}
 
-        {this.state.loading && <Loader />}
         <GlobalStyle />
       </AppThumb>
     );
