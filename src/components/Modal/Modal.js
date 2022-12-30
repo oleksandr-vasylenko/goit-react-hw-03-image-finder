@@ -6,8 +6,8 @@ const modalStyles = {
     position: 'fixed',
     top: '0',
     left: '0',
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -15,6 +15,7 @@ const modalStyles = {
     zIndex: '1200',
   },
   content: {
+    width: '80%',
     border: 'none',
     borderRadius: '0',
     padding: '0',
@@ -33,7 +34,7 @@ export const ImageModal = ({ isOpen, isClosed, largeImageURL, tags }) => {
 };
 
 ImageModal.propTypes = {
-  isOpen: PropTypes.func,
+  isOpen: PropTypes.bool,
   isClosed: PropTypes.func,
   largeImageURL: PropTypes.string,
   tags: PropTypes.string,

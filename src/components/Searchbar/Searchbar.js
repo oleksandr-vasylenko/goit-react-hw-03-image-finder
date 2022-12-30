@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { GrSearch } from 'react-icons/gr';
 
 import {
@@ -52,6 +52,6 @@ export class Searchbar extends Component {
   }
 }
 
-Searchbar.propTypes = {
-  onSubmit: PropTypes.func,
-};
+// Searchbar.propTypes = {
+//   onSubmit: PropTypes.func,
+// };

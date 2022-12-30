@@ -27,7 +27,7 @@ export class ImageItem extends Component {
           <ImageModal
             largeImageURL={largeImageURL}
             tags={tags}
-            isOpen={this.openModal}
+            isOpen={this.openModal !== true}
             isClosed={this.closeModal}
           />
         )}
