@@ -1,11 +1,12 @@
 import { Component } from 'react';
 import { GlobalStyle } from '../../GlobalStyle';
-import { Searchbar } from 'components/Searchbar/Searchbar';
-import { AppThumb } from './App.Styled';
-import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-// import { Button } from 'components/Button/Button';
 import { fetchImages } from 'components/services/api';
-import { RotatingLines } from 'react-loader-spinner';
+
+import { AppThumb } from './App.Styled';
+import { Loader } from 'components/Loader/Loader';
+import { Searchbar } from 'components/Searchbar/Searchbar';
+import { ImageGallery } from 'components/ImageGallery/ImageGallery';
+import { Button } from 'components/Button/Button';
 
 export class App extends Component {
   state = {
@@ -54,18 +55,10 @@ export class App extends Component {
         <ImageGallery images={this.state.images} />
 
         {this.state.images.length > 11 && (
-          <button onClick={this.loadMore}>LOAD MORE</button>
+          <Button onLoadClick={this.loadMore}>LOAD MORE</Button>
         )}
 
-        {this.state.loading && (
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
-        )}
+        {this.state.loading && <Loader />}
         <GlobalStyle />
       </AppThumb>
     );
