@@ -16,9 +16,38 @@ export class App extends Component {
     loading: false,
   };
 
+  // componentDidUpdate(_, prevState) {
+  //   if (prevState.page !== this.state.page) {
+  //     this.setState({ loading: true });
+  //     fetchImages(this.state.query, this.state.page)
+  //       .then(data => {
+  //         this.setState({
+  //           images: [...prevState.images, ...data.hits],
+  //         });
+  //       })
+  //       .finally(() => this.setState({ loading: false }));
+
+  //   } else if (prevState.query !== this.state.query) {
+  //     this.setState({ loading: true });
+  //     fetchImages(this.state.query, this.state.page)
+  //       .then(data => {
+  //         this.setState({ images: data.hits });
+  //       })
+  //       .finally(() => this.setState({ loading: false }));
+  //   }
+  // }
+
   componentDidUpdate(_, prevState) {
-    if (prevState.page !== this.state.page) {
+    if (prevState.query !== this.state.query) {
       this.setState({ loading: true });
+      fetchImages(this.state.query, this.state.page)
+        .then(data => {
+          this.setState({ images: data.hits });
+        })
+        .finally(() => this.setState({ loading: false }));
+    } else if (prevState.page !== this.state.page) {
+      this.setState({ loading: true });
+
       fetchImages(this.state.query, this.state.page)
         .then(data => {
           this.setState({
@@ -26,18 +55,11 @@ export class App extends Component {
           });
         })
         .finally(() => this.setState({ loading: false }));
-    } else if (prevState.query !== this.state.query) {
-      this.setState({ loading: true });
-      fetchImages(this.state.query, this.state.page)
-        .then(data => {
-          this.setState({ images: data.hits });
-        })
-        .finally(() => this.setState({ loading: false }));
     }
   }
 
   handleFormSubmit = sumbittedQuery => {
-    this.setState({ query: sumbittedQuery });
+    this.setState({ query: sumbittedQuery, page: 1 });
   };
 
   loadMore = () => {
