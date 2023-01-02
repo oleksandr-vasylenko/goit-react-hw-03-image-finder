@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import { ModalImage } from './Modal.Styled';
 
 const modalStyles = {
   overlay: {
@@ -15,7 +16,7 @@ const modalStyles = {
     zIndex: '1200',
   },
   content: {
-    width: '80%',
+    width: '60%',
     border: 'none',
     borderRadius: '0',
     padding: '0',
@@ -28,7 +29,7 @@ Modal.setAppElement('#root');
 export const ImageModal = ({ isOpen, isClosed, largeImageURL, tags }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={isClosed} style={modalStyles}>
-      <img src={largeImageURL} alt={tags}></img>
+      <ModalImage src={largeImageURL} alt={tags}></ModalImage>
     </Modal>
   );
 };
